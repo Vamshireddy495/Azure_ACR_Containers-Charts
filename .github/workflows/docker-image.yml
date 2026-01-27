@@ -34,7 +34,7 @@ jobs:
       run: |
         az acr login --name ${{ secrets.ACR_NAME }}
 
-        IMAGE_NAME=${{ secrets.ACR_NAME }}.azurecr.io/my-image-name
+        IMAGE_NAME=${{ secrets.ACR_NAME }}.azurecr.io/Todo-NodeJS
 
         docker build -t $IMAGE_NAME:latest \
                      -t $IMAGE_NAME:${{ github.sha }} \
