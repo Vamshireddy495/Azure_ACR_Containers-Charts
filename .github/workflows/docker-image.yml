@@ -33,8 +33,16 @@ jobs:
     - name: Build and Push to ACR
       run: |
         az acr login --name ${{ secrets.ACR_NAME }}
-        docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/my-image:latest .
-        docker push ${{ secrets.ACR_NAME }}.azurecr.io/my-image:latest
+
+        IMAGE_NAME=${{ secrets.ACR_NAME }}.azurecr.io/my-image-name
+
+        docker build -t $IMAGE_NAME:latest \
+                     -t $IMAGE_NAME:${{ github.sha }} \
+                     -f ./To-do-list-app/Dockerfile .
+        
+        docker push $IMAGE_NAME:latest
+        docker push $IMAGE_NAME:{{ github.sha}}
+    # docker push ${{ secrets.ACR_NAME }}.azurecr.io/my-image:latest
     # - name: ACR build
     #   id: acr
     #   uses: azure/acr-build@v1
