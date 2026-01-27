@@ -41,7 +41,7 @@ jobs:
                      -f ./To-do-list-app/Dockerfile .
         
         docker push $IMAGE_NAME:latest
-        docker push $IMAGE_NAME:{{ github.sha}}
+        docker push $IMAGE_NAME:${{ github.sha}}
     # docker push ${{ secrets.ACR_NAME }}.azurecr.io/my-image:latest
     # - name: ACR build
     #   id: acr
