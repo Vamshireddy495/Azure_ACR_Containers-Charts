@@ -1,0 +1,6 @@
+dependencies:
+- name: mysql
+  repository: https://comet-ml.github.io/comet-mysql-helm
+  version: 1.0.7
+digest: sha256:0fcbf3136723c42137d16991509f80723e950fbca5793a3fdee93c064e219150
+generated: "2026-01-28T19:11:28.705216825-05:00"

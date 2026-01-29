@@ -1,0 +1,11 @@
+apiVersion: v2
+name: todo-app
+description: A Helm chart for Node.js and MySQL Operator
+type: application
+version: 0.1.0
+appVersion: "1.16.0"
+
+dependencies:
+  - name: mysql
+    version: "1.0.7" # Check Artifact Hub for the latest 2026 version
+    repository: "https://comet-ml.github.io/comet-mysql-helm"

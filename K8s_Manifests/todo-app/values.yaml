@@ -1,0 +1,52 @@
+# Node.js Application Config
+replicaCount: 1
+
+image:
+  repository: acrregistryvamshi.azurecr.io/my-image-name
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 3000
+
+database:
+  name: "todoappdb"
+  user: "appuser"
+
+
+ingress:
+  enabled: true
+  className: "nginx"
+  hosts:
+    - host: todo.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+# --- MySQL Operator (Sub-chart) Settings ---
+# --- MySQL Operator (Sub-chart) Settings ---
+mysqlinnodbcluster:
+  enabled: true
+  
+  tls:
+    enabled: true
+    useSelfSigned: true  # This tells the operator to create the secret for you
+  router:
+    tls:
+      enabled: true
+      useSelfSigned: true
+  
+  credentials:
+    root:
+      user: "root"
+      # This tells the MySQL cluster to USE your existing secret
+      existingSecret: "mysql-secrets"
+      passwordKey: "root-password"
+    
+  databases:
+    - name: "todoappdb"
+  
+  serverInstances: 1  # Reduced for testing
+  routerInstances: 1
